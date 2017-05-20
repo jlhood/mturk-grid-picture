@@ -1,0 +1,66 @@
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Other" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p>Help create a sketched copy of a large picture by drawing a small piece of it:</p>
+
+<ul>
+	<li>Sketch a copy of the image using the provided canvas.</li>
+	<li>We&#39;re not looking for a perfect match. Just sketch something&nbsp;resembling&nbsp;the image.</li>
+	<li>Use different shades of black/gray to help make your drawing resemble the image.</li>
+	<li>Requester will approve unless it&#39;s clear no effort was put into the sketch.</li>
+</ul>
+</div>
+</div>
+<!-- End Instructions --><!-- Content Body -->
+
+<section>
+<fieldset><label>Hand-draw this image on the canvas below:</label>
+
+<div><img alt="image to draw" class="imagecontainer" id="image-fragment" src="${image_url}" /></div>
+</fieldset>
+</section>
+
+<section>
+<div class="lc-container">
+<div class="literally" id="lc">&nbsp;</div>
+</div>
+<input id="image-data-url" name="Drawing" type="hidden" value="" /> <input id="image-width" name="image-width" type="hidden" value="${image_width}" /> <input id="image-height" name="image-height" type="hidden" value="${image_height}" /> <!-- End Content Body --></section>
+<!-- close container -->
+<style type="text/css">fieldset {
+    padding: 10px;
+    background:#fbfbfb;
+    border-radius:5px;
+    margin-bottom:5px;
+}
+.lc-container {
+    margin: auto;
+}
+.literally {
+    width: 100%;
+    position: relative;
+}
+</style>
+<!-- stylesheet --></div>
+</section>
+<link href="https://s3-us-west-2.amazonaws.com/grid-picture/css/literallycanvas.css" rel="stylesheet" /><!-- dependency: React.js --><script src="https://s3-us-west-2.amazonaws.com/grid-picture/js/jquery-1.12.4.min.js"></script><script src="https://fb.me/react-15.1.0.min.js"></script><script src="https://fb.me/react-with-addons-15.1.0.js"></script><script src="https://fb.me/react-dom-15.1.0.js"></script><!-- Literally Canvas --><script src="https://s3-us-west-2.amazonaws.com/grid-picture/js/literallycanvas.min.js"></script><script type="text/javascript">
+$(document).ready(function() {
+var lc = LC.init(document.getElementById("lc"), {
+  imageURLPrefix: 'https://s3-us-west-2.amazonaws.com/grid-picture/images/literallycanvas',
+  toolbarPosition: 'top',
+  imageSize: {
+    width: $('#image-width').val(),
+    height: $('#image-height').val()
+  },
+  defaultStrokeWidth: 3,
+  strokeWidths: [1, 2, 3, 5, 30]
+});
+lc.on('drawingChange', function() {
+  document.getElementById("image-data-url").value = lc.getImage().toDataURL();
+});
+});
+</script>
