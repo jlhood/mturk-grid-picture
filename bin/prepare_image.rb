@@ -17,7 +17,8 @@ def get_dimensions(path)
 end
 
 def image_fragment_path(image_path, row, col, dest_dir)
-  File.join(dest_dir, File.basename(image_path).split('.').insert(-2, row, col).join('.'))
+  extension = File.basename(image_path).split('.').last
+  File.join(dest_dir, "original.#{row}.#{col}.#{extension}")
 end
 
 abort("Usage: prepare_image.rb num_rows num_cols image_path output_dir") unless ARGV.size == 4
